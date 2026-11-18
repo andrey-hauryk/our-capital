@@ -1,15 +1,18 @@
 <script setup>
-import { provide, ref } from 'vue'
+import { onMounted, onUnmounted, provide, ref } from 'vue'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
-import { CURRENCIES } from '../composables/useAccounts'
-import { assetGroups } from '../finance'
+import { assetGroups, CURRENCIES } from '../finance'
+import { useCryptoQuotes } from '../composables/useCryptoQuotes'
 import AppIcon from '../components/AppIcon.vue'
 
 const route = useRoute()
 const selectedCurrency = ref('RUB')
+const { start, stop } = useCryptoQuotes()
 const navigation = [{ id: 'overview', label: 'Обзор', shortLabel: 'Обзор', route: 'finances', icon: 'overview' }, ...assetGroups]
 
 provide('selectedCurrency', selectedCurrency)
+onMounted(start)
+onUnmounted(stop)
 </script>
 
 <template>

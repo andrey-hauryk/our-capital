@@ -437,6 +437,47 @@
   overflow-wrap: anywhere;
 }
 
+.holding-quote {
+  display: block;
+  margin-top: 4px;
+  color: var(--finance-muted);
+  font-size: .875rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.quote-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 12px;
+  color: var(--finance-muted);
+}
+
+.finance-app .quote-status p {
+  font-size: .875rem;
+}
+
+.quote-status a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+.quote-status-error {
+  color: #913552;
+}
+
+.quote-retry {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--finance-line);
+  border-radius: 10px;
+  background: var(--finance-surface);
+  color: var(--finance-accent);
+}
+
 .finance-app .accounts-empty {
   padding: 20px;
   color: var(--finance-muted);

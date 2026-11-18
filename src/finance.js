@@ -1,3 +1,5 @@
+export const CURRENCIES = Object.freeze(['RUB', 'BYN', 'USD', 'EUR'])
+
 export const categoryLabels = {
   securities: 'Ценные бумаги',
   iis: 'ИИС',
@@ -15,4 +17,13 @@ export function formatMoney(amount, currency) {
   return new Intl.NumberFormat('ru-RU', {
     style: 'currency', currency, minimumFractionDigits: 0, maximumFractionDigits: 2,
   }).format(amount)
+}
+export function formatCoinPrice(amount, currency) {
+  return new Intl.NumberFormat('ru-RU', {
+    style: 'currency', currency, minimumFractionDigits: 2, maximumFractionDigits: 8,
+  }).format(amount)
+}
+
+export function formatQuantity(quantity) {
+  return new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 8 }).format(quantity)
 }

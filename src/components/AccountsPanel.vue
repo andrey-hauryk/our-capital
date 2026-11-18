@@ -1,6 +1,6 @@
 <script setup>
 import AppIcon from './AppIcon.vue'
-import { categoryLabels, formatMoney } from '../finance'
+import { categoryLabels, formatCoinPrice, formatMoney, formatQuantity } from '../finance'
 
 defineProps({
   accounts: { type: Array, required: true },
@@ -20,10 +20,14 @@ defineProps({
           <span class="account-icon"><AppIcon :name="account.category === 'crypto' ? 'crypto' : account.category === 'cash' ? 'wallet' : 'securities'" /></span>
           <div>
             <span class="account-name">{{ account.name }}</span>
-            <span class="account-category">{{ categoryLabels[account.category] }}</span>
+            <template v-if="account.symbol">
+              <span class="account-category">{{ formatQuantity(account.quantity) }} {{ account.symbol }}</span>
+              <span class="holding-quote">1 {{ account.symbol }} = {{ account.unitPrice === null ? '—' : formatCoinPrice(account.unitPrice, account.currency) }}</span>
+            </template>
+            <span v-else class="account-category">{{ categoryLabels[account.category] }}</span>
           </div>
         </div>
-        <strong class="account-balance">{{ formatMoney(account.balance, account.currency) }}</strong>
+        <strong class="account-balance">{{ account.balance === null ? '—' : formatMoney(account.balance, account.currency) }}</strong>
       </li>
     </ul>
     <p v-else class="accounts-empty">{{ emptyText }}</p>

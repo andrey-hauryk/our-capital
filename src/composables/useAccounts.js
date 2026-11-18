@@ -1,8 +1,9 @@
 import { computed, readonly, ref } from 'vue'
 import { accounts as configuredAccounts } from '../data/accounts.js'
+import { CURRENCIES } from '../finance.js'
 
 export const CATEGORY_IDS = Object.freeze(['securities', 'iis', 'crypto', 'cash'])
-export const CURRENCIES = Object.freeze(['RUB', 'BYN', 'USD', 'EUR'])
+export { CURRENCIES } from '../finance.js'
 export function validateAccount(input) {
   const name = typeof input?.name === 'string' ? input.name.trim() : ''
   if (!name || name.length > 80) return { valid: false, error: 'Название счёта должно содержать от 1 до 80 символов.' }

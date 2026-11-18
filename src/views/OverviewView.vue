@@ -1,14 +1,13 @@
 <script setup>
 import { computed, inject } from 'vue'
 import { RouterLink } from 'vue-router'
-import { useAccounts } from '../composables/useAccounts'
+import { usePortfolio } from '../composables/usePortfolio'
 import { assetGroups, formatMoney } from '../finance'
 import AccountsPanel from '../components/AccountsPanel.vue'
+import QuoteStatus from '../components/QuoteStatus.vue'
 
 const currency = inject('selectedCurrency')
-const { accounts, getOverview } = useAccounts()
-const summary = computed(() => getOverview(currency.value))
-const visibleAccounts = computed(() => accounts.value.filter((account) => account.currency === currency.value))
+const { items: visibleAccounts, summary, hasCrypto } = usePortfolio(currency)
 const groups = computed(() => assetGroups.map((group) => {
   const categories = summary.value.byCategory.filter((item) => group.categories.includes(item.id))
   const balance = categories.reduce((total, item) => total + Math.round(item.balance * 100), 0) / 100
@@ -35,8 +34,8 @@ const donutStyle = computed(() => {
     <div class="overview-grid">
       <article class="capital-card" aria-labelledby="capital-title">
         <p id="capital-title" class="card-eyebrow">Всего в {{ currency }}</p>
-        <strong class="capital-amount">{{ formatMoney(summary.total, currency) }}</strong>
-        <p class="capital-note">Счетов: {{ summary.count }}</p>
+        <strong class="capital-amount">{{ summary.incomplete ? '—' : formatMoney(summary.total, currency) }}</strong>
+        <p class="capital-note">Позиций: {{ summary.count }}<template v-if="summary.incomplete"> · ждём курс</template></p>
       </article>
       <article class="panel distribution-card" aria-labelledby="distribution-title">
         <header class="panel-heading"><h2 id="distribution-title">Распределение</h2></header>
@@ -48,7 +47,8 @@ const donutStyle = computed(() => {
         </div>
       </article>
     </div>
+    <QuoteStatus v-if="hasCrypto" />
     <p v-if="summary.otherCurrencyCount" class="currency-note">Счета в других валютах: {{ summary.otherCurrencyCount }}. Выберите валюту вверху.</p>
-    <AccountsPanel v-if="visibleAccounts.length" :accounts="visibleAccounts" />
+    <AccountsPanel v-if="visibleAccounts.length" :accounts="visibleAccounts" title="Счета и активы" />
   </div>
 </template>
