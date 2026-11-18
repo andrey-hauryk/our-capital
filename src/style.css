@@ -15,7 +15,7 @@ body {
   margin: 0;
 }
 
-main {
+.welcome-page {
   display: grid;
   place-items: center;
   min-height: 100vh;
@@ -32,13 +32,13 @@ main:focus {
   padding-top: calc(2rem + 18svh);
 }
 
-section {
+.welcome-page section {
   width: 100%;
   max-width: 32rem;
   overflow-wrap: anywhere;
 }
 
-h1 {
+.welcome-page h1 {
   max-width: 14ch;
   margin: 0 auto 1.25rem;
   font-size: clamp(2rem, 7vw, 3rem);
@@ -48,7 +48,7 @@ h1 {
   text-wrap: balance;
 }
 
-p {
+.welcome-page p {
   max-width: 28ch;
   margin: 0 auto;
   color: #8c5b6d;
@@ -88,72 +88,7 @@ p {
   fill: currentColor;
 }
 
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-  margin-top: 1.5rem;
-  padding: .5rem .75rem;
-  color: #a94166;
-  line-height: 1.5;
-  text-underline-offset: .25em;
-}
-
 a:focus-visible {
   outline: 3px solid #70374d;
   outline-offset: 5px;
-}
-
-.finance-page {
-  align-items: start;
-  padding-top: clamp(2rem, 8svh, 4rem);
-}
-
-.finance-overview {
-  text-align: left;
-}
-
-.finance-overview > h1 {
-  max-width: none;
-  margin-bottom: 1.5rem;
-  font-size: clamp(1.9rem, 7vw, 2.5rem);
-}
-
-.category-list,
-.subcategory-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.category-list {
-  display: grid;
-  gap: 1rem;
-}
-
-.category-card {
-  padding: 1.25rem;
-  border: 1px solid #edccd7;
-  border-radius: 1.25rem;
-  background: #fff9fb;
-}
-
-.category-card h2 {
-  margin: 0;
-  font-size: 1.125rem;
-  font-weight: 600;
-  line-height: 1.5;
-}
-
-.subcategory-list {
-  margin-top: 1rem;
-  padding-left: 1rem;
-  border-left: 2px solid #edccd7;
-  color: #8c5b6d;
-}
-
-.subcategory-list li {
-  padding-block: .5rem;
-  font-size: 1rem;
-  line-height: 1.5;
 }
