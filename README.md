@@ -21,6 +21,12 @@ npm run preview
 Готовый сайт находится в `dist/`. Приложение использует базовый путь `/our-capital/`,
 поэтому локальная версия также открывается по этому пути.
 
+## Страницы
+
+Посвящение открывается по `/our-capital/#/`, а кнопка «нажми лапкой» ведёт на
+`/our-capital/#/finances`. Используется Vue Router с hash history, чтобы прямые
+ссылки и обновление страницы работали в GitHub Pages без настройки сервера.
+
 ## GitHub Pages
 
 Workflow `.github/workflows/deploy.yml` собирает приложение при каждом push в
@@ -35,8 +41,8 @@ Workflow `.github/workflows/deploy.yml` собирает приложение п
 Ожидаемый адрес после успешного деплоя:
 <https://andrey-hauryk.github.io/our-capital/>.
 
-При переименовании репозитория обновите `base` в `vite.config.js`, ссылку на GitHub
-в `src/App.vue` и адрес сайта в этом файле.
+При переименовании репозитория обновите `base` в `vite.config.js` и адреса сайта
+в этом файле.
 
 Документация: [Vite: GitHub Pages](https://vite.dev/guide/static-deploy.html#github-pages),
 [GitHub: custom workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
