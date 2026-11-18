@@ -21,8 +21,14 @@ defineProps({
           <div>
             <span class="account-name">{{ account.name }}</span>
             <template v-if="account.symbol">
-              <span class="account-category">{{ formatQuantity(account.quantity) }} {{ account.symbol }}</span>
-              <span class="holding-quote">1 {{ account.symbol }} = {{ account.unitPrice === null ? '—' : formatCoinPrice(account.unitPrice, account.currency) }}</span>
+              <template v-if="account.assetType === 'security'">
+                <span class="account-category">{{ formatQuantity(account.quantity) }} шт. · {{ account.symbol }} · {{ account.category === 'iis' ? 'ИИС' : 'Брокерский' }}</span>
+                <span class="holding-quote">1 акция = {{ account.unitPrice === null ? '—' : formatCoinPrice(account.unitPrice, account.currency) }}<template v-if="account.priceType === 'previous'"> · предыдущая сессия {{ account.priceDate }}</template></span>
+              </template>
+              <template v-else>
+                <span class="account-category">{{ formatQuantity(account.quantity) }} {{ account.symbol }}</span>
+                <span class="holding-quote">1 {{ account.symbol }} = {{ account.unitPrice === null ? '—' : formatCoinPrice(account.unitPrice, account.currency) }}</span>
+              </template>
             </template>
             <span v-else class="account-category">{{ categoryLabels[account.category] }}</span>
           </div>

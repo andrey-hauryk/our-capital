@@ -3,16 +3,18 @@ import { onMounted, onUnmounted, provide, ref } from 'vue'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { assetGroups, CURRENCIES } from '../finance'
 import { useCryptoQuotes } from '../composables/useCryptoQuotes'
+import { useSecuritiesQuotes } from '../composables/useSecuritiesQuotes'
 import AppIcon from '../components/AppIcon.vue'
 
 const route = useRoute()
 const selectedCurrency = ref('RUB')
 const { start, stop } = useCryptoQuotes()
+const { start: startSecurities, stop: stopSecurities } = useSecuritiesQuotes()
 const navigation = [{ id: 'overview', label: 'Обзор', shortLabel: 'Обзор', route: 'finances', icon: 'overview' }, ...assetGroups]
 
 provide('selectedCurrency', selectedCurrency)
-onMounted(start)
-onUnmounted(stop)
+onMounted(() => { start(); startSecurities() })
+onUnmounted(() => { stop(); stopSecurities() })
 </script>
 
 <template>

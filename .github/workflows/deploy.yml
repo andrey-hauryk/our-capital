@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '7,22,37,52 * * * *'
 
 permissions:
   contents: read
@@ -36,6 +38,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Fetch securities quote snapshot
+        run: node scripts/fetch-securities-snapshot.mjs
 
       - name: Check whether Pages is enabled
         id: pages

@@ -27,3 +27,8 @@ export function formatCoinPrice(amount, currency) {
 export function formatQuantity(quantity) {
   return new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 8 }).format(quantity)
 }
+
+export function formatShare(share) {
+  if (share > 0 && share < 0.1) return '<0,1%'
+  return `${new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 1 }).format(share)}%`
+}
