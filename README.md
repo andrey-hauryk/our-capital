@@ -23,8 +23,10 @@ npm run preview
 
 ## GitHub Pages
 
-Workflow `.github/workflows/deploy.yml` собирает и публикует приложение при каждом
-push в `main`. Также его можно запустить вручную через вкладку Actions.
+Workflow `.github/workflows/deploy.yml` собирает приложение при каждом push в
+`main`. Если GitHub Pages включён, workflow также публикует сайт. Пока Pages
+выключен, сборка выполняется, а публикация пропускается. Workflow также можно
+запустить вручную через вкладку Actions.
 
 В настройках репозитория **Settings → Pages → Build and deployment → Source**
 должен быть выбран **GitHub Actions**. Для Pages из приватного репозитория нужен
